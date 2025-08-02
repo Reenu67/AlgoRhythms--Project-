@@ -1,0 +1,59 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickDesk - Login</title>
+  <link rel="stylesheet" href="main-style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to QuickDesk</h1>
+
+    <div class="auth-box">
+      <form id="login-form">
+        <h2>Login</h2>
+
+        <label for="role">Select Role:</label>
+        <select id="role" required>
+          <option value="">--Select Role--</option>
+          <option value="enduser">End User</option>
+          <option value="agent">Support Agent</option>
+          <option value="admin">Admin</option>
+        </select>
+
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" required>
+
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" required>
+
+        <button type="submit">Login</button>
+      </form>
+
+      <button id="toggle-signup" class="toggle-signup" style="display:none;">Create Account</button>
+
+      <form id="signup-form" style="display:none;">
+        <h2>Create Account</h2>
+
+        <label for="signup-name">Full Name:</label>
+        <input type="text" id="signup-name" required>
+
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" required>
+
+        <label for="signup-username">Username:</label>
+        <input type="text" id="signup-username" required>
+
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="main-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Ticket</title>
+  <link rel="stylesheet" href="user-style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Create a New Ticket</h2>
+    <form id="ticketForm">
+      <input type="text" id="ticketId" placeholder="Ticket ID" required />
+      <input type="text" id="ticketSubject" placeholder="Subject" required />
+      <input type="text" id="ticketCategory" placeholder="Category" required />
+      <select id="ticketStatus">
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+        <option value="Closed">Closed</option>
+      </select>
+      <input type="number" id="ticketReplies" placeholder="Number of Replies" />
+      <button type="submit" class="submit-btn">Submit</button>
+      <a href="dashboard.html" class="cancel-btn">Cancel</a>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('ticketForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const id = document.getElementById("ticketId").value;
+      const subject = document.getElementById("ticketSubject").value;
+      const category = document.getElementById("ticketCategory").value;
+      const status = document.getElementById("ticketStatus").value;
+      const replies = parseInt(document.getElementById("ticketReplies").value) || 0;
+      const updated = new Date().toISOString().split('T')[0];
+
+      const newTicket = { id, subject, category, status, updated, replies };
+      const existing = JSON.parse(localStorage.getItem("tickets") || "[]");
+      existing.push(newTicket);
+      localStorage.setItem("tickets", JSON.stringify(existing));
+
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>

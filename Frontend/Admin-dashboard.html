@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+  <header class="admin-header">
+    <h1>QuickDesk Admin Panel</h1>
+    <p>ID: ADM001 | Role: Super Admin</p>
+  </header>
+
+  <div class="admin-container">
+    <nav class="admin-sidebar">
+      <ul>
+        <li onclick="showSection('users')">Manage Users</li>
+        <li onclick="showSection('categories')">Manage Categories</li>
+      </ul>
+    </nav>
+
+    <main class="admin-main">
+      <!-- USERS SECTION -->
+      <section id="usersSection">
+        <h2>User Management</h2>
+        <button onclick="addUser()">Add User</button>
+        <input type="text" placeholder="Search Users" oninput="filterUsers(this.value)">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>Role</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="userTable"></tbody>
+        </table>
+      </section>
+
+      <!-- CATEGORIES SECTION -->
+      <section id="categoriesSection" style="display:none">
+        <h2>Category Management</h2>
+        <button onclick="addCategory()">Add Category</button>
+        <table>
+          <thead>
+            <tr><th>Category Name</th><th>Description</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="categoryTable"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+.header, .filters, .ticket-table, .summary-cards {
+  margin: 20px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.filters input, .filters select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.ticket-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+.ticket-table th, .ticket-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+.ticket-table th {
+  background-color: #eee;
+}
+.create-ticket-btn {
+  padding: 8px 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.create-ticket-btn:hover {
+  background-color: #0056b3;
+}
+.form-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+.form-container input,
+.form-container select,
+.form-container button {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.submit-btn {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+}
+.cancel-btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+  background-color: #ccc;
+  border-radius: 5px;
+}

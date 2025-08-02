@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDesk - Dashboard</title>
+  <link rel="stylesheet" href="user-style.css" />
+</head>
+<body>
+  <div class="header">
+    <h1>QuickDesk</h1>
+    <a href="create-ticket.html" class="create-ticket-btn">+ Create Ticket</a>
+  </div>
+
+  <div class="summary-cards" id="summary">
+    <div class="card">🟢 Open: <span id="open-count">0</span></div>
+    <div class="card">🟡 In Progress: <span id="progress-count">0</span></div>
+    <div class="card">🔵 Resolved: <span id="resolved-count">0</span></div>
+    <div class="card">🔴 Closed: <span id="closed-count">0</span></div>
+  </div>
+
+  <div class="filters">
+    <input type="text" id="searchInput" placeholder="Search tickets...">
+    <select id="statusFilter">
+      <option value="All">All Statuses</option>
+      <option value="Open">Open</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Resolved">Resolved</option>
+      <option value="Closed">Closed</option>
+    </select>
+    <select id="sortSelect">
+      <option value="Recent">Recently Updated</option>
+      <option value="Replies">Most Replies</option>
+    </select>
+  </div>
+
+  <div class="ticket-table">
+    <table id="ticketTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject</th>
+          <th>Category</th>
+          <th>Status</th>
+          <th>Updated</th>
+          <th>Replies</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="user-script.js"></script>
+</body>
+</html>

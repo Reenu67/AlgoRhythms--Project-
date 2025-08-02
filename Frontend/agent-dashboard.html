@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support Agent Dashboard</title>
+  <link rel="stylesheet" href="agent-style.css" />
+</head>
+<body>
+  <div class="header" id="agentHeader">
+    <!-- Filled by JavaScript -->
+  </div>
+
+  <div class="stats">
+    <p id="resolvedCount"></p>
+  </div>
+
+  <div class="filters">
+    <label>Filter Tickets:</label>
+    <select id="queueFilter">
+      <option value="all">All Tickets</option>
+      <option value="unassigned">Unassigned</option>
+      <option value="assigned">My Tickets</option>
+    </select>
+  </div>
+
+  <div class="ticket-table">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject</th>
+          <th>Category</th>
+          <th>Status</th>
+          <th>Assigned To</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="agentTicketList">
+        <!-- Tickets will load here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal for reply -->
+  <div class="modal" id="replyModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Reply to Ticket</h2>
+      <p id="modalTicketId"></p>
+      <textarea id="agentReply" placeholder="Type your reply here..."></textarea>
+      <select id="updateStatus">
+        <option value="Open">Open</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+        <option value="Closed">Closed</option>
+      </select>
+      <button onclick="submitReply()">Submit</button>
+    </div>
+  </div>
+
+  <script src="agent-script.js"></script>
+</body>
+</html>
