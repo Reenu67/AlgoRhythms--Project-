@@ -1,10 +1,7 @@
-// admin-script.js
-const users = [];
+let users = [];
+let categories = [];
 
-const categories = [
-  { name: "Login Issues", description: "Problems logging in" },
-  { name: "Network", description: "Connectivity problems" }
-];
+const API_BASE = "http://localhost:5000";  // Adjust if hosted differently
 
 function showSection(section) {
   document.getElementById("usersSection").style.display = section === "users" ? "block" : "none";
@@ -17,11 +14,11 @@ function renderUsers() {
   users.forEach(user => {
     table.innerHTML += `
       <tr>
-        <td>${user.id}</td>
+        <td>${user._id}</td>
         <td>${user.name}</td>
-        <td>${user.role}</td>
-        <td>${user.status}</td>
-        <td><button onclick="editUser('${user.id}')">Edit</button></td>
+        <td>${user.role || "N/A"}</td>
+        <td>${user.status || "Active"}</td>
+        <td><button onclick="editUser('${user._id}')">Edit</button></td>
       </tr>`;
   });
 }
@@ -46,11 +43,11 @@ function filterUsers(query) {
   filtered.forEach(user => {
     table.innerHTML += `
       <tr>
-        <td>${user.id}</td>
+        <td>${user._id}</td>
         <td>${user.name}</td>
-        <td>${user.role}</td>
-        <td>${user.status}</td>
-        <td><button onclick="editUser('${user.id}')">Edit</button></td>
+        <td>${user.role || "N/A"}</td>
+        <td>${user.status || "Active"}</td>
+        <td><button onclick="editUser('${user._id}')">Edit</button></td>
       </tr>`;
   });
 }
@@ -71,7 +68,35 @@ function editCategory(name) {
   alert(`Edit category ${name} (to be implemented)`);
 }
 
-// Initial rendering
-renderUsers();
-renderCategories();
+// 🔁 Fetch All Users from Backend
+async function fetchUsers() {
+  try {
+    const res = await fetch(`${API_BASE}/agents`);
+    const data = await res.json();
+    users = data;
+    renderUsers();
+  } catch (err) {
+    console.error("Failed to fetch users:", err);
+  }
+}
 
+// 🔁 Fetch All Categories (dummy for now, until Flask route is added)
+async function fetchCategories() {
+  try {
+    const res = await fetch(`${API_BASE}/categories`); // You'll need to create this route
+    const data = await res.json();
+    categories = data;
+    renderCategories();
+  } catch (err) {
+    console.warn("Using default categories, backend not ready yet.");
+    categories = [
+      { name: "Login Issues", description: "Problems logging in" },
+      { name: "Network", description: "Connectivity problems" }
+    ];
+    renderCategories();
+  }
+}
+
+//  Initial Fetch
+fetchUsers();
+fetchCategories();

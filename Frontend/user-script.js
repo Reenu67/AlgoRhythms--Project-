@@ -3,8 +3,11 @@ const searchInput = document.getElementById("searchInput");
 const statusFilter = document.getElementById("statusFilter");
 const sortSelect = document.getElementById("sortSelect");
 
-function renderTickets() {
-  const tickets = JSON.parse(localStorage.getItem("tickets") || "[]");
+const API_BASE = "http://localhost:3000"; // Adjust as needed
+
+async function renderTickets() {
+  const response = await fetch(`${API_BASE}/tickets`);
+  let tickets = await response.json();
 
   const searchTerm = searchInput.value.toLowerCase();
   const filterStatus = statusFilter.value;
@@ -17,7 +20,7 @@ function renderTickets() {
 
   filtered.sort((a, b) => {
     if (sortBy === "Replies") {
-      return b.replies - a.replies;
+      return (b.replies || 0) - (a.replies || 0);
     } else {
       return new Date(b.updated) - new Date(a.updated);
     }
@@ -30,8 +33,8 @@ function renderTickets() {
       <td>${ticket.subject}</td>
       <td>${ticket.category}</td>
       <td>${ticket.status}</td>
-      <td>${ticket.updated}</td>
-      <td>${ticket.replies}</td>
+      <td>${ticket.updated || "-"}</td>
+      <td>${ticket.replies || 0}</td>
     </tr>`;
     tbody.insertAdjacentHTML("beforeend", row);
   });
