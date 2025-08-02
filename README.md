@@ -1,2 +1,2 @@
-# AlgoRhythms--Project-
+# AlgoRhythms--Project-Quick Desk
 Odoo hackathon - Team AlgoRhythms 
