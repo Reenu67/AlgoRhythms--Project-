@@ -1,32 +1,57 @@
-const express = require('express');
-const router = express.Router();
+import express from "express";
 
-// In-memory store
-let tickets = [];
+const ticketRoutes = (tickets) => {
+  const router = express.Router();
 
-// Create ticket
-router.post('/create', (req, res) => {
-  const { title, description } = req.body;
+  router.get("/tickets", (req, res) => {
+    res.json(tickets);
+  });
 
-  if (!title || !description) {
-    return res.status(400).json({ error: 'Title and description required' });
-  }
+  router.post("/api/tickets", (req, res) => {
+    const { id, subject, category, status, replies = 0, updated } = req.body;
+    if (!id || !subject || !category || !status) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
 
-  const newTicket = {
-    id: Date.now().toString(),
-    title,
-    description,
-    status: 'open',
-    createdAt: new Date()
-  };
+    const newTicket = {
+      id,
+      subject,
+      category,
+      status,
+      replies,
+      updated,
+      assignedTo: null,
+      messages: []
+    };
 
-  tickets.push(newTicket);
-  res.status(201).json({ message: 'Ticket created', ticket: newTicket });
-});
+    tickets.push(newTicket);
+    res.status(201).json({ success: true, ticket: newTicket });
+  });
 
-// Get all tickets
-router.get('/all', (req, res) => {
-  res.status(200).json(tickets);
-});
+  router.put("/tickets/:id/assign", (req, res) => {
+    const ticket = tickets.find(t => t.id === req.params.id);
+    if (!ticket) return res.status(404).json({ message: "Ticket not found" });
 
-module.exports = router;
+    ticket.assignedTo = req.body.assignedTo;
+    res.json({ success: true, ticket });
+  });
+
+  router.post("/tickets/:id/reply", (req, res) => {
+    const ticket = tickets.find(t => t.id === req.params.id);
+    if (!ticket) return res.status(404).json({ message: "Ticket not found" });
+
+    const { message, status, role } = req.body;
+    if (message) {
+      ticket.messages.push({ message, role, date: new Date().toISOString() });
+      ticket.replies = (ticket.replies || 0) + 1;
+    }
+    if (status) ticket.status = status;
+    ticket.updated = new Date().toISOString().split("T")[0];
+
+    res.json({ success: true, ticket });
+  });
+
+  return router;
+};
+
+export default ticketRoutes;
